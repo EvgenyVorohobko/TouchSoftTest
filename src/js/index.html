@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TouchSoft</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body oncontextmenu="return false;">
+<section class="program">
+    <div class="container">
+
+        <div class="header">
+            <h1 id="message">TouchSoft</h1>
+        </div>
+
+        <div class="body">
+            <div class="disc_on_rod" id="left_disc"></div>
+            <p><img src="image/rod.jpg" width="550" height="387"></p>
+            <div class="disc_on_rod" id="right_disc"></div>
+        </div>
+
+        <div class="disc_wait" id="disc_wait"></div>
+
+        <div class="footer">
+            <button class="button" id="button">Add disc</button>
+            <input class="input" type="number" id="input">
+            <p hidden id="error">Invalid weight. Please, enter one more time.</p>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>
