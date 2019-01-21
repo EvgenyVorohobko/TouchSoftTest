@@ -3,6 +3,7 @@ package vorokhobko;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 
 /**
  * SolutionBarbell.
@@ -81,6 +82,7 @@ public class SolutionBarbell {
      * @return tag.
      */
     private int optionFirstCalculationOfTheWeight(int sum, ArrayList<Integer> list) {
+        Iterator<Integer> iterator = list.iterator();
         if (sum == 0) {
             for (Integer aList : list) {
                 sum += aList;
@@ -93,23 +95,29 @@ public class SolutionBarbell {
         } else {
             result = sum / 2;
         }
-        int i = 0;
-        while (i < list.size()) {
-            for (Integer aList : list) {
-                count = list.get(i) + aList;
-                if (count == result) {
-                    break;
+        while (iterator.hasNext()) {
+            if (iterator.next() > sum / 2) {
+                result = 0;
+            } else {
+                int i = 0;
+                while (i < list.size()) {
+                    for (Integer aList : list) {
+                        count = list.get(i) + aList;
+                        if (count == result) {
+                            break;
+                        }
+                        count = 0;
+                    }
+                    if (count == result) {
+                        break;
+                    }
+                    i++;
                 }
-                count = 0;
+                if (i > list.size()) {
+                    int element = 0;
+                    result = optionSecondCalculationOfTheWeight(element, this.list);
+                }
             }
-            if (count == result) {
-                break;
-            }
-            i++;
-        }
-        if (i > list.size()) {
-            int element = 0;
-            result = optionSecondCalculationOfTheWeight(element, this.list);
         }
         return result * 2;
     }

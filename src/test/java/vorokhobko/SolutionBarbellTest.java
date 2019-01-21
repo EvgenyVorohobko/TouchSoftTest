@@ -73,6 +73,26 @@ public class SolutionBarbellTest {
      * @Test.
      */
     @Test
+    public void whenAddWeightToRodThenCount() throws ImpossibleWorkException {
+        int[] array = {1, 2, 4, 8, 16};
+        int value = this.solutionBarbell.workForTest(array);
+        int result = 0;
+        assertThat(value, is(result));
+    }
+    /**
+     * @Test.
+     */
+    @Test
+    public void whenAddWeightToRodThenCountFirst() throws ImpossibleWorkException {
+        int[] array = {1, 3, 5, 7, 9};
+        int value = this.solutionBarbell.workForTest(array);
+        int result = 24;
+        assertThat(value, is(result));
+    }
+    /**
+     * @Test.
+     */
+    @Test
     public void whenAddWeightToRodThenCountMaxWeightThird() throws ImpossibleWorkException {
         int[] array = {1, 2, 3, 6};
         int value = this.solutionBarbell.workForTest(array);
