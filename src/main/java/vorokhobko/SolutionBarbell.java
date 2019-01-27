@@ -3,14 +3,12 @@ package vorokhobko;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Iterator;
 
 /**
  * SolutionBarbell.
  * Class SolutionBarbell calculates the weight on the barbell. TouchSoftTest solution.
- *
  * @author Evgeny Vorokhobko (vorokhobko2011@yandex.ru).
- * @version 1.
+ * @version 3.
  * @since 14.01.2019.
  */
 public class SolutionBarbell {
@@ -19,13 +17,17 @@ public class SolutionBarbell {
      */
     private ArrayList<Integer> list = new ArrayList<>();
     /**
+     * The class field.
+     */
+    private int sumAllNumberInArray = 0;
+    /**
      * The method checks the restrictions imposed on the program.
      * @param array - array.
      */
     private void checkRestrictions(int[] array) throws ImpossibleWorkException {
         boolean isNeedSave = false;
-        int sum = Arrays.stream(array).sum();
-        if (sum < 10000) {
+        this.sumAllNumberInArray = Arrays.stream(array).sum();
+        if (this.sumAllNumberInArray < 10000) {
             for (int i = 0; i < array.length - 1; i++) {
                 if (array[i] <= 20 && array[i] >= 1) {
                     isNeedSave = true;
@@ -81,75 +83,27 @@ public class SolutionBarbell {
      * @param sum - sum.
      * @return tag.
      */
-    private int optionFirstCalculationOfTheWeight(int sum, ArrayList<Integer> list) {
-        Iterator<Integer> iterator = list.iterator();
-        if (sum == 0) {
-            for (Integer aList : list) {
-                sum += aList;
-            }
-        }
-        int result;
-        int count = 0;
-        if (sum % 2 != 0) {
-            result = (sum - 1) / 2;
-        } else {
-            result = sum / 2;
-        }
-        while (iterator.hasNext()) {
-            if (iterator.next() > sum / 2) {
-                result = 0;
-            } else {
-                int i = 0;
-                while (i < list.size()) {
-                    for (Integer aList : list) {
-                        count = list.get(i) + aList;
-                        if (count == result) {
-                            break;
-                        }
-                        count = 0;
-                    }
-                    if (count == result) {
-                        break;
-                    }
-                    i++;
-                }
-                if (i > list.size()) {
-                    int element = 0;
-                    result = optionSecondCalculationOfTheWeight(element, this.list);
-                }
-            }
-        }
-        return result * 2;
-    }
-    /**
-     * One option of calculating the mass of discs on the barbell.
-     * @param list - list.
-     * @param result - result.
-     * @return tag.
-     */
-    private int optionSecondCalculationOfTheWeight(int result, ArrayList<Integer> list) {
-        int count = 0;
+    private int countSumOnBarbell(int sum, ArrayList<Integer> list) {
         Collections.reverse(list);
-        for (int i = 0; i < list.size(); i++) {
-            if (list.size() == 1) {
-                break;
-            } else {
-                int sum = list.get(i);
-                while (count != sum) {
-                    for (int j = i + 1; j < list.size(); j++) {
-                        count = list.get(i) + list.get(j);
-                        if (count == sum) {
-                            list.remove(j);
-                            list.remove(i);
-                            break;
-                        }
-                    }
-                    i++;
+        int result = 0, sumLeft = 0, sumRight = 0;
+        int halfAmount = this.sumAllNumberInArray / 2;
+
+        for (Integer aList : list) {
+            if (Math.abs(sumLeft + aList) == halfAmount |
+                    Math.abs(sumLeft + aList - sumRight) <= Math.abs(sumRight + aList - sumLeft)) {
+                if (sumLeft == halfAmount) {
+                    break;
                 }
-                list.remove(0);
-                count = 0;
-                result += sum * 2;
-                i = -1;
+                sumLeft += aList;
+            } else {
+                sumRight += aList;
+            }
+        }
+        if (sumLeft == sumRight) {
+            if (sum == 0) {
+                result = sumLeft + sumRight;
+            } else {
+                result = sumLeft + sumRight + sum;
             }
         }
         return result;
@@ -159,15 +113,15 @@ public class SolutionBarbell {
      * @param array - array.
      * @return tag.
      */
-    private int raisingTheRod(int[] array) throws ImpossibleWorkException {
+    private int raisingTheBarbell(int[] array) throws ImpossibleWorkException {
         checkRestrictions(array);
         int result = duplicateWeight(array);
         if (array.length > 2) {
-            result = optionFirstCalculationOfTheWeight(result, this.list);
+            result = countSumOnBarbell(result, this.list);
         } else {
             result = checkSize(array);
         }
-       return result;
+        return result;
     }
     /**
      * The method prints information to the console..
@@ -175,7 +129,7 @@ public class SolutionBarbell {
      * @return tag.
      */
     public int workForTest(int[] array) throws ImpossibleWorkException {
-        int value = raisingTheRod(array);
+        int value = raisingTheBarbell(array);
         if (value > 0) {
             System.out.print("The total weight of the barbell " + value + ". ");
             System.out.println("The weight on the left side = the weight on the right side = " + value / 2);
