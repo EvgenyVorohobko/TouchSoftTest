@@ -9,7 +9,7 @@ import static org.junit.Assert.assertThat;
  * Test.
  *
  * @author Evgeny Vorokhobko (vorokhobko2011@yandex.ru).
- * @version 3.
+ * @version 1.
  * @since 14.01.2019.
  */
 public class SolutionBarbellTest {
@@ -97,6 +97,16 @@ public class SolutionBarbellTest {
         int[] array = {19, 18, 16, 14};
         int value = this.solutionBarbell.workForTest(array);
         int result = 0;
+        assertThat(value, is(result));
+    }
+    /**
+     * @Test.
+     */
+    @Test
+    public void whenCalcTheMaxBarbellWeightsForTheEighthTime() throws ImpossibleWorkException {
+        int[] array = {3, 4, 3, 3, 2};
+        int value = this.solutionBarbell.workForTest(array);
+        int result = 12;
         assertThat(value, is(result));
     }
     /**
