@@ -7,6 +7,7 @@ import java.util.Collections;
 /**
  * SolutionBarbell.
  * Class SolutionBarbell calculates the weight on the barbell. TouchSoftTest solution.
+ *
  * @author Evgeny Vorokhobko (vorokhobko2011@yandex.ru).
  * @version 3.
  * @since 14.01.2019.
@@ -22,6 +23,7 @@ public class SolutionBarbell {
     private int sumAllNumberInArray = 0;
     /**
      * The method checks the restrictions imposed on the program.
+     *
      * @param array - array.
      */
     private void checkRestrictions(int[] array) throws ImpossibleWorkException {
@@ -42,6 +44,7 @@ public class SolutionBarbell {
     }
     /**
      * The method checks the array size.
+     *
      * @param array - array.
      * @return tag.
      */
@@ -56,6 +59,7 @@ public class SolutionBarbell {
     }
     /**
      * The method removes duplicates in the array.
+     *
      * @param array - array.
      * @return tag.
      */
@@ -79,13 +83,14 @@ public class SolutionBarbell {
     }
     /**
      * One option of calculating the mass of discs on the barbell.
+     *
      * @param list - list.
-     * @param sum - sum.
+     * @param sum  - sum.
      * @return tag.
      */
     private int countSumOnBarbell(int sum, ArrayList<Integer> list) {
         Collections.reverse(list);
-        int result = 0, sumLeft = 0, sumRight = 0;
+        int result, sumLeft = 0, sumRight = 0;
         int halfAmount = this.sumAllNumberInArray / 2;
 
         for (Integer aList : list) {
@@ -105,11 +110,22 @@ public class SolutionBarbell {
             } else {
                 result = sumLeft + sumRight + sum;
             }
+        } else {
+            result = sum;
+            for (int i = 0; i < list.size(); i++) {
+                for (int j = 1; j < list.size(); j++) {
+                    if (result == list.get(i) + list.get(j)) {
+                        result += list.get(i) + list.get(j);
+                        break;
+                    }
+                }
+            }
         }
         return result;
     }
     /**
      * The main method of execution of work.
+     *
      * @param array - array.
      * @return tag.
      */
@@ -125,6 +141,7 @@ public class SolutionBarbell {
     }
     /**
      * The method prints information to the console..
+     *
      * @param array - array.
      * @return tag.
      */
