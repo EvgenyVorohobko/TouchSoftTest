@@ -1,4 +1,4 @@
-package vorokhobko;
+package vorokhobko.barbellTest;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package vorokhobko;
+package vorokhobko.barbellTest;
 
 /**
  * ImpossibleWorkException.

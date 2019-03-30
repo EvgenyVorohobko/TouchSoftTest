@@ -1,6 +1,9 @@
-package vorokhobko;
+package vorokhobko.barbellTest;
 
 import org.junit.Test;
+import vorokhobko.barbellTest.ImpossibleWorkException;
+import vorokhobko.barbellTest.SolutionBarbell;
+
 import java.util.Random;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
