@@ -23,7 +23,7 @@ public class Resolve {
      * @param used - boolean array.
      */
     private void generateNumber(String[] arr, int[] current, int next, boolean[] used) {
-        if (next == arr.length) {//Если уже полностью выбрали очередной вариант
+        if (next == arr.length) {
             String[] elChars = new String[4];
             for (int i = 0; i < arr.length; i++) {
                 elChars[i] = arr[current[i]];
@@ -34,12 +34,12 @@ public class Resolve {
             }
             this.arrayLine.add(line.toString());
         }
-        for (int i = 0; i < arr.length; i++) {//смотрим на каждый элемент из исхождного массива
-            if (!used[i]) {//если он еще не использовался - ставим его следующим
-                used[i] = true;//отмечаем его как уже использованный
-                current[next] = i;//записываем его в наш сейчашний вариант
-                generateNumber(arr, current, next + 1, used);//рекурсивно выбираем следующий элемент и т.д.
-                used[i] = false;//пробуем дальше - убираем этот элемент, чтобы поставить какой-то другой
+        for (int i = 0; i < arr.length; i++) {
+            if (!used[i]) {
+                used[i] = true;
+                current[next] = i;
+                generateNumber(arr, current, next + 1, used);
+                used[i] = false;
             }
         }
     }
@@ -49,23 +49,18 @@ public class Resolve {
      */
     private ArrayList<String> generateOperators() {
         ArrayList<String> list = new ArrayList<>();
-        char abc[] = new char[]{'*', '-', '+', '/'};//множество допустимых символов (алфавит)
-        int N = abc.length;//N - размер алфавита
-        int K = 3;//кол-во элементов в комбинации
+        char abc[] = new char[]{'*', '-', '+', '/'};
+        int N = abc.length;
+        int K = 3;
 
-        int pow[] = new int[K + 1];//массив для степеней числа N: N^0, N^1, .., N^K
+        int pow[] = new int[K + 1];
         pow[0] = 1;
-        for (int i = 1; i <= K; i++) {//вычисляем степени числа N
+        for (int i = 1; i <= K; i++) {
             pow[i] = pow[i - 1] * N;
         }
-        //перебираем все номера комбинаций
         for (int i = 0; i < pow[K]; i++) {
             char arr[] = new char[K];
-            //вычисляем элементы комбинации
             for (int j = 0; j < K; j++) {
-                //каждый элемент получаем из массива abc по индексу,
-                //индекс - это число в системе счисления по основанию N (0..N-1)
-                //в соответствующем разряде j (от 0 до K-1 включительно)
                 arr[j] = abc[(i / pow[j]) % N];
             }
             StringBuilder line = new StringBuilder();
