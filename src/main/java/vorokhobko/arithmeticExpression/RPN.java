@@ -147,11 +147,7 @@ public class RPN {
             case '*':
                 return a * b;
             case '/':
-                if (b == 0) {
-                    System.err.println("Division by ZERO! Program do not work with it.");
-                } else {
-                    return a / b;
-                }
+                return a / b;
             default:
                 return 0.00;
         }
