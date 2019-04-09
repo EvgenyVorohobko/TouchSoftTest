@@ -128,6 +128,16 @@ public class Resolve {
             line.append(cost[4]).append(bracketSecond).append(cost[5]).append(cost[6]);
             result.add(line.toString());
             line.delete(0, 10);
+
+            line.append(cost[0]).append(cost[1]).append(bracketFirst).append(cost[2]).append(cost[3]);
+            line.append(cost[4]).append(cost[5]).append(cost[6]).append(bracketSecond);
+            result.add(line.toString());
+            line.delete(0, 10);
+
+            line.append(cost[0]).append(cost[1]).append(bracketFirst).append(cost[2]).append(cost[3]);
+            line.append(cost[4]).append(cost[5]).append(cost[6]).append(bracketSecond);
+            result.add(line.toString());
+            line.delete(0, 10);
         }
         return result;
     }

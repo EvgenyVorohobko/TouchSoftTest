@@ -61,5 +61,13 @@ public class ResolveTest {
         boolean result = resolve.canBeEqualTo24(numbs);
         assertThat(result, is(false));
     }
-
+    /**
+     * Test Add.
+     */
+    @Test
+    public void whenDoNotWorkResolveThanAddNumbersThird() {
+        int[] numbs = {8, 8, 3, 3};
+        boolean result = resolve.canBeEqualTo24(numbs);
+        assertThat(result, is(true));
+    }
 }
