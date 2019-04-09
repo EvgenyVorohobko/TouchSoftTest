@@ -147,7 +147,7 @@ public class RPN {
             case '*':
                 return a * b;
             case '/':
-                return a / b;
+                return (double) Math.round(a / b);
             default:
                 return 0.00;
         }
